@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation - DevStick</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body class="bg-slate-900 text-white">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-900 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-2">
+                    <i class='bx bx-chip text-blue-400 text-2xl'></i>
+                    <span class="text-xl font-bold">DevStick</span>
+                </div>
+                <div class="flex space-x-8">
+                    <a href="/" class="text-slate-300 hover:text-blue-400">Home</a>
+                    <a href="features" class="text-slate-300 hover:text-blue-400">Features</a>
+                    <a href="pricing" class="text-slate-300 hover:text-blue-400">Pricing</a>
+                    <a href="docs" class="text-blue-400 hover:text-blue-500">Docs</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Content -->
+    <div class="min-h-screen pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            <!-- Quick Links Section -->
+            <div class="mb-12 p-6 bg-slate-800/50 rounded-lg border border-slate-700">
+                <h2 class="text-2xl font-bold mb-4">Quick Links</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="#getting-started" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                        <i class='bx bx-play-circle'></i>
+                        <span>Getting Started</span>
+                    </a>
+                    <a href="#installation" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                        <i class='bx bx-download'></i>
+                        <span>Installation Guide</span>
+                    </a>
+                    <a href="#troubleshooting" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                        <i class='bx bx-help-circle'></i>
+                        <span>Troubleshooting</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Documentation -->
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Sidebar Navigation -->
+                <div class="lg:col-span-1">
+                    <div class="sticky top-24 space-y-4">
+                        <div class="bg-slate-800/50 rounded-lg p-4">
+                            <h3 class="font-bold mb-2">Documentation</h3>
+                            <ul class="space-y-2">
+                                <li><a href="#getting-started" class="text-blue-400 hover:text-blue-300">Getting Started</a></li>
+                                <li><a href="#installation" class="text-blue-400 hover:text-blue-300">Installation</a></li>
+                                <li><a href="#system-requirements" class="text-blue-400 hover:text-blue-300">System Requirements</a></li>
+                                <li><a href="#usage" class="text-blue-400 hover:text-blue-300">Basic Usage</a></li>
+                                <li><a href="#troubleshooting" class="text-blue-400 hover:text-blue-300">Troubleshooting</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Content -->
+                <div class="lg:col-span-3 space-y-12">
+                    <!-- Getting Started -->
+                    <section id="getting-started" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">Getting Started</h2>
+                        <div class="prose prose-invert max-w-none">
+                            <p class="text-slate-300 mb-4">
+                                [Your introduction to DevStick will go here. This section should cover the basics of what DevStick is and what it's used for.]
+                            </p>
+                            <div class="bg-slate-800/50 p-4 rounded-lg mb-4">
+                                <p class="text-yellow-400 mb-2"><i class='bx bx-info-circle'></i> Note:</p>
+                                <p class="text-slate-300">
+                                    [Important information or prerequisites will go here.]
+                                </p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Installation -->
+                    <section id="installation" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">Installation</h2>
+                        <div class="space-y-6">
+                            <div class="bg-slate-800/50 rounded-lg p-6">
+                                <h3 class="text-xl font-bold mb-4">Step 1: BIOS Setup</h3>
+                                <p class="text-slate-300 mb-4">[Instructions for BIOS configuration will go here]</p>
+                                <div class="bg-slate-900/50 p-4 rounded-lg">
+                                    <code class="text-green-400">
+                                        [Example commands or settings will go here]
+                                    </code>
+                                </div>
+                            </div>
+
+                            <div class="bg-slate-800/50 rounded-lg p-6">
+                                <h3 class="text-xl font-bold mb-4">Step 2: First Boot</h3>
+                                <p class="text-slate-300">[Instructions for first boot process will go here]</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- System Requirements -->
+                    <section id="system-requirements" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">System Requirements</h2>
+                        <div class="bg-slate-800/50 rounded-lg p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <h3 class="text-xl font-bold mb-4">Minimum Requirements</h3>
+                                    <ul class="space-y-2 text-slate-300">
+                                        <li class="flex items-center space-x-2">
+                                            <i class='bx bx-check text-green-400'></i>
+                                            <span>[Minimum requirement 1]</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <i class='bx bx-check text-green-400'></i>
+                                            <span>[Minimum requirement 2]</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-4">Recommended</h3>
+                                    <ul class="space-y-2 text-slate-300">
+                                        <li class="flex items-center space-x-2">
+                                            <i class='bx bx-check text-green-400'></i>
+                                            <span>[Recommended spec 1]</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <i class='bx bx-check text-green-400'></i>
+                                            <span>[Recommended spec 2]</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Basic Usage -->
+                    <section id="usage" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">Basic Usage</h2>
+                        <div class="bg-slate-800/50 rounded-lg p-6">
+                            <p class="text-slate-300 mb-4">[Basic usage instructions will go here]</p>
+                        </div>
+                    </section>
+
+                    <!-- Troubleshooting -->
+                    <section id="troubleshooting" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">Troubleshooting</h2>
+                        <div class="space-y-6">
+                            <div class="bg-slate-800/50 rounded-lg p-6">
+                                <h3 class="text-xl font-bold mb-4">Common Issues</h3>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h4 class="font-bold mb-2">[Problem 1]</h4>
+                                        <p class="text-slate-300">[Solution 1]</p>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-2">[Problem 2]</h4>
+                                        <p class="text-slate-300">[Solution 2]</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-300 py-8 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-2">
+                    <i class='bx bx-coffee text-blue-400'></i>
+                    <span>DevStick © 2024</span>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <a href="#" class="hover:text-blue-400 transition-colors">
+                        <i class='bx bxl-github text-xl'></i>
+                    </a>
+                    <a href="#" class="hover:text-blue-400 transition-colors">Terms</a>
+                    <a href="#" class="hover:text-blue-400 transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-blue-400 transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
