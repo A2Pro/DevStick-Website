@@ -1,6 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, session, request
 app = Flask(__name__)
-
+from waitress import serve
 
 
 PRODUCTS = {
@@ -44,4 +44,4 @@ def docs():
 
 
 if __name__ == '__main__':
-    app.run(port=2349, host='0.0.0.0')
+    serve(app, host="0.0.0.0", port=8080)
