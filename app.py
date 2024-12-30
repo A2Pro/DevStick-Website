@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, url_for, session, request, jsonify
-from flask_session import Session
 import stripe
 import os
 from dotenv import load_dotenv
@@ -11,7 +10,6 @@ load_dotenv()
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yetgryhutjklkhjghfgdfsegrhytjkylkjythrgefarhtj'  
 app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
 
 
 stripe.api_key = os.getenv("STRIPE_PRIVATE")  
