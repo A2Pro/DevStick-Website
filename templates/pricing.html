@@ -70,6 +70,11 @@
                                 </div>
                             </div>
 
+                            <button 
+                                onclick="handlePurchase('ubuntu', 'ubuntu-price')" 
+                                class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                                Purchase Now
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -112,7 +117,11 @@
                                 </div>
                             </div>
 
-                            
+                            <button 
+                                onclick="handlePurchase('pop_os', 'pop-price')" 
+                                class="w-full bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                                Purchase Now
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -155,7 +164,11 @@
                                 </div>
                             </div>
 
-
+                            <button 
+                                onclick="handlePurchase('arch', 'arch-price')" 
+                                class="w-full bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                                Purchase Now
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -198,11 +211,16 @@
                                 </div>
                             </div>
 
+                            <button 
+                                onclick="handlePurchase('mint', 'mint-price')" 
+                                class="w-full bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-semibold transition-colors">
+                                Purchase Now
+                            </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Custom Build Card - Spans full width -->
+                <!-- Custom Build Card -->
                 <div class="md:col-span-2 lg:col-span-3 bg-gradient-to-r from-purple-500/20 via-purple-600/20 to-purple-500/20 rounded-lg border border-purple-500/50 overflow-hidden">
                     <div class="p-8">
                         <div class="text-center mb-6">
@@ -237,6 +255,7 @@
     </div>
 
     <!-- Footer -->
+    <!-- Footer -->
     <footer class="bg-slate-900 text-slate-300 py-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -256,7 +275,10 @@
         </div>
     </footer>
 
+    <script src="https://js.stripe.com/v3/"></script>
     <script>
+        const stripe = Stripe('pk_live_51QZOneEHP8FE5L0s2ArTmJUBHfBJV3p9YFFEMXeA7zkzZOucOxKJhS5Ii0h5u8NrRtzq0rmqomUFJtP7VCILFY2X00DInHMRa2'); // Replace with your publishable key
+
         const storagePrices = {
             '32': 5,
             '64': 10,
@@ -273,10 +295,67 @@
             
             // Update price display
             document.getElementById(priceElementId).textContent = `$${totalPrice}`;
-            
-            // Update hidden form input
-            const form = select.closest('div').querySelector('.storage-form');
-            form.querySelector('.storage-input').value = storageSize;
+        }
+
+        async function handlePurchase(productId, priceElementId) {
+            const button = event.target;
+            setLoading(button, true);
+
+            const storageSelect = document.querySelector(`#${priceElementId}`).closest('.p-8').querySelector('select');
+            const storageSize = storageSelect.value;
+
+            try {
+                const response = await fetch('/create-checkout-session', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        product: productId,
+                        storage: storageSize
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const session = await response.json();
+                
+                if (session.error) {
+                    console.error('Error:', session.error);
+                    setLoading(button, false);
+                    return;
+                }
+
+                const result = await stripe.redirectToCheckout({
+                    sessionId: session.id
+                });
+
+                if (result.error) {
+                    console.error('Error:', result.error);
+                    setLoading(button, false);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                setLoading(button, false);
+            }
+        }
+
+        function setLoading(button, loading) {
+            if (loading) {
+                button.disabled = true;
+                button.innerHTML = `
+                    <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-white inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Processing...
+                `;
+            } else {
+                button.disabled = false;
+                button.innerHTML = 'Purchase Now';
+            }
         }
     </script>
 </body>
