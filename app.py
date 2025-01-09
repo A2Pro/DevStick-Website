@@ -9,7 +9,7 @@ load_dotenv()
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = random.randint(1283912384983285352112414212412, 235723241421412427127421764217864722648712414371442984577285892734598271423154)  
+app.config['SECRET_KEY'] = "devstick-key" + str(random.randint(1283912384983285352112414212412, 235723241421412427127421764217864722648712414371442984577285892734598271423154))  
 app.config['SESSION_TYPE'] = 'filesystem'
 
 
@@ -19,11 +19,11 @@ webhook_secret = os.getenv("STRIPE_WEBHOOK")
 PRODUCTS = {
     'ubuntu': {
         'name': 'Ubuntu Edition',
-        'base_price': 2000
+        'base_price': 2500
     },
     'pop_os': {
         'name': 'Pop!_OS Edition',
-        'base_price': 3000
+        'base_price': 3500
     },
     'arch': {
         'name': 'Arch Linux Edition',

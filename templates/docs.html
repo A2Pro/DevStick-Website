@@ -6,10 +6,24 @@
     <title>Documentation - DevStick</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#0f172a',  // slate-900
+                        'dark-surface': 'rgba(30, 41, 59, 0.5)',  // slate-800/50
+                        'dark-border': '#1e293b',  // slate-800
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body class="bg-slate-900 text-white">
+<body class="bg-slate-900 text-white min-h-screen">
     <!-- Navigation -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-900 border-b border-slate-800">
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-sm border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center space-x-2">
@@ -17,51 +31,51 @@
                     <span class="text-xl font-bold">DevStick</span>
                 </div>
                 <div class="flex space-x-8">
-                    <a href="/" class="text-slate-300 hover:text-blue-400">Home</a>
-                    <a href="features" class="text-slate-300 hover:text-blue-400">Features</a>
-                    <a href="pricing" class="text-slate-300 hover:text-blue-400">Pricing</a>
-                    <a href="docs" class="text-blue-400 hover:text-blue-500">Docs</a>
-                    <a href="/support" class="text-blue-400 hover:text-blue-500">Support</a>
+                    <a href="/" class="text-slate-300 hover:text-blue-400 transition-colors">Home</a>
+                    <a href="/features" class="text-slate-300 hover:text-blue-400 transition-colors">Features</a>
+                    <a href="/pricing" class="text-slate-300 hover:text-blue-400 transition-colors">Pricing</a>
+                    <a href="/docs" class="text-blue-400 hover:text-blue-500 transition-colors">Docs</a>
+                    <a href="/support" class="text-slate-300 hover:text-blue-400 transition-colors">Support</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Documentation Content -->
     <div class="min-h-screen pt-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-            <!-- Quick Links Section -->
-            <div class="mb-12 p-6 bg-slate-800/50 rounded-lg border border-slate-700">
+            <!-- Quick Links -->
+            <div class="mb-12 p-6 bg-slate-800/50 rounded-lg border border-slate-700/50 backdrop-blur-sm">
                 <h2 class="text-2xl font-bold mb-4">Quick Links</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <a href="#getting-started" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                    <a href="#getting-started" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors">
                         <i class='bx bx-play-circle'></i>
                         <span>Getting Started</span>
                     </a>
-                    <a href="#installation" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                    <a href="#boot-instructions" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors">
                         <i class='bx bx-download'></i>
-                        <span>Installation Guide</span>
+                        <span>Boot Instructions</span>
                     </a>
-                    <a href="#troubleshooting" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300">
+                    <a href="#troubleshooting" class="flex items-center space-x-2 text-blue-400 hover:text-blue-300 transition-colors">
                         <i class='bx bx-help-circle'></i>
                         <span>Troubleshooting</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Main Documentation -->
+            <!-- Main Content Grid -->
             <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                <!-- Sidebar Navigation -->
+                <!-- Sidebar -->
                 <div class="lg:col-span-1">
                     <div class="sticky top-24 space-y-4">
-                        <div class="bg-slate-800/50 rounded-lg p-4">
-                            <h3 class="font-bold mb-2">Documentation</h3>
-                            <ul class="space-y-2">
-                                <li><a href="#getting-started" class="text-blue-400 hover:text-blue-300">Getting Started</a></li>
-                                <li><a href="#installation" class="text-blue-400 hover:text-blue-300">Installation</a></li>
-                                <li><a href="#system-requirements" class="text-blue-400 hover:text-blue-300">System Requirements</a></li>
-                                <li><a href="#usage" class="text-blue-400 hover:text-blue-300">Basic Usage</a></li>
-                                <li><a href="#troubleshooting" class="text-blue-400 hover:text-blue-300">Troubleshooting</a></li>
+                        <div class="bg-slate-800/50 rounded-lg p-4 border border-slate-700/50 backdrop-blur-sm">
+                            <h3 class="text-lg font-bold mb-3">Documentation</h3>
+                            <ul class="space-y-3">
+                                <li><a href="#getting-started" class="text-blue-400 hover:text-blue-300 transition-colors">Getting Started</a></li>
+                                <li><a href="#boot-instructions" class="text-blue-400 hover:text-blue-300 transition-colors">Boot Instructions</a></li>
+                                <li><a href="#persistence" class="text-blue-400 hover:text-blue-300 transition-colors">Persistence Setup</a></li>
+                                <li><a href="#system-requirements" class="text-blue-400 hover:text-blue-300 transition-colors">System Requirements</a></li>
+                                <li><a href="#wifi-drivers" class="text-blue-400 hover:text-blue-300 transition-colors">WiFi Drivers</a></li>
+                                <li><a href="#troubleshooting" class="text-blue-400 hover:text-blue-300 transition-colors">Troubleshooting</a></li>
                             </ul>
                         </div>
                     </div>
@@ -69,43 +83,91 @@
 
                 <!-- Main Content -->
                 <div class="lg:col-span-3 space-y-12">
-                    <!-- Getting Started -->
+                    <!-- Content sections remain the same but with updated background colors -->
                     <section id="getting-started" class="scroll-mt-20">
                         <h2 class="text-3xl font-bold mb-6">Getting Started</h2>
                         <div class="prose prose-invert max-w-none">
                             <p class="text-slate-300 mb-4">
-                                [Your introduction to DevStick will go here. This section should cover the basics of what DevStick is and what it's used for.]
+                                Your DevStick comes pre-configured with your chosen Linux distribution and is ready to boot. The drive is configured for both UEFI and Legacy BIOS systems, ensuring maximum compatibility across different computers.
                             </p>
-                            <div class="bg-slate-800/50 p-4 rounded-lg mb-4">
-                                <p class="text-yellow-400 mb-2"><i class='bx bx-info-circle'></i> Note:</p>
+                            <div class="bg-slate-800/50 p-4 rounded-lg mb-4 border border-slate-700/50">
+                                <p class="text-yellow-400 mb-2"><i class='bx bx-info-circle'></i> Important:</p>
                                 <p class="text-slate-300">
-                                    [Important information or prerequisites will go here.]
+                                    Before first boot, ensure Secure Boot is disabled in your BIOS settings. This is necessary for proper functionality of all Linux distributions.
                                 </p>
                             </div>
                         </div>
                     </section>
 
-                    <!-- Installation -->
-                    <section id="installation" class="scroll-mt-20">
-                        <h2 class="text-3xl font-bold mb-6">Installation</h2>
+                    <section id="boot-instructions" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">Boot Instructions by System</h2>
                         <div class="space-y-6">
                             <div class="bg-slate-800/50 rounded-lg p-6">
-                                <h3 class="text-xl font-bold mb-4">Step 1: BIOS Setup</h3>
-                                <p class="text-slate-300 mb-4">[Instructions for BIOS configuration will go here]</p>
-                                <div class="bg-slate-900/50 p-4 rounded-lg">
-                                    <code class="text-green-400">
-                                        [Example commands or settings will go here]
-                                    </code>
-                                </div>
+                                <h3 class="text-xl font-bold mb-4">Windows Systems</h3>
+                                <ol class="space-y-4 text-slate-300">
+                                    <li>1. Plug in your DevStick while the computer is turned off</li>
+                                    <li>2. Power on your computer and immediately press the boot menu key:
+                                        <ul class="ml-6 mt-2 space-y-1">
+                                            <li>• Dell: F12</li>
+                                            <li>• HP: F9</li>
+                                            <li>• Lenovo: F12 or Fn + F12</li>
+                                            <li>• ASUS: F8</li>
+                                            <li>• Acer: F12</li>
+                                            <li>• Microsoft Surface: Hold Volume Down</li>
+                                        </ul>
+                                    </li>
+                                    <li>3. Select "USB Storage Device" or your DevStick's name from the boot menu</li>
+                                </ol>
                             </div>
-
+    
                             <div class="bg-slate-800/50 rounded-lg p-6">
-                                <h3 class="text-xl font-bold mb-4">Step 2: First Boot</h3>
-                                <p class="text-slate-300">[Instructions for first boot process will go here]</p>
+                                <h3 class="text-xl font-bold mb-4">Mac Systems</h3>
+                                <ol class="space-y-4 text-slate-300">
+                                    <li>1. Plug in your DevStick</li>
+                                    <li>2. Intel Macs:
+                                        <ul class="ml-6 mt-2 space-y-1">
+                                            <li>• Restart and hold Option (⌥) key</li>
+                                            <li>• Select your DevStick from the boot menu</li>
+                                        </ul>
+                                    </li>
+                                    <li>3. M1/M2 Macs:
+                                        <ul class="ml-6 mt-2 space-y-1">
+                                            <li>• Shut down completely</li>
+                                            <li>• Hold the power button until "Loading startup options" appears</li>
+                                            <li>• Select your DevStick</li>
+                                        </ul>
+                                    </li>
+                                </ol>
                             </div>
                         </div>
                     </section>
-
+    
+                    <!-- Persistence Setup -->
+                    <section id="persistence" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">Persistence Setup</h2>
+                        <div class="bg-slate-800/50 rounded-lg p-6">
+                            <p class="text-slate-300 mb-4">Your DevStick comes with persistence enabled by default, meaning:</p>
+                            <ul class="space-y-2 text-slate-300 mb-6">
+                                <li class="flex items-center space-x-2">
+                                    <i class='bx bx-check text-green-400'></i>
+                                    <span>Your files and changes are saved between reboots</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <i class='bx bx-check text-green-400'></i>
+                                    <span>System updates are preserved</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <i class='bx bx-check text-green-400'></i>
+                                    <span>Installed applications remain available</span>
+                                </li>
+                            </ul>
+                            <div class="bg-slate-900/50 p-4 rounded-lg">
+                                <p class="text-yellow-400 mb-2">Note:</p>
+                                <p class="text-slate-300">The persistence partition is automatically mounted at boot. No additional configuration is required.</p>
+                            </div>
+                        </div>
+                    </section>
+    
                     <!-- System Requirements -->
                     <section id="system-requirements" class="scroll-mt-20">
                         <h2 class="text-3xl font-bold mb-6">System Requirements</h2>
@@ -116,11 +178,15 @@
                                     <ul class="space-y-2 text-slate-300">
                                         <li class="flex items-center space-x-2">
                                             <i class='bx bx-check text-green-400'></i>
-                                            <span>[Minimum requirement 1]</span>
+                                            <span>2GB RAM</span>
                                         </li>
                                         <li class="flex items-center space-x-2">
                                             <i class='bx bx-check text-green-400'></i>
-                                            <span>[Minimum requirement 2]</span>
+                                            <span>Dual-core CPU (2GHz+)</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <i class='bx bx-check text-green-400'></i>
+                                            <span>USB 2.0 port</span>
                                         </li>
                                     </ul>
                                 </div>
@@ -129,40 +195,78 @@
                                     <ul class="space-y-2 text-slate-300">
                                         <li class="flex items-center space-x-2">
                                             <i class='bx bx-check text-green-400'></i>
-                                            <span>[Recommended spec 1]</span>
+                                            <span>4GB+ RAM</span>
                                         </li>
                                         <li class="flex items-center space-x-2">
                                             <i class='bx bx-check text-green-400'></i>
-                                            <span>[Recommended spec 2]</span>
+                                            <span>Quad-core CPU</span>
+                                        </li>
+                                        <li class="flex items-center space-x-2">
+                                            <i class='bx bx-check text-green-400'></i>
+                                            <span>USB 3.0 port</span>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
                     </section>
-
-                    <!-- Basic Usage -->
-                    <section id="usage" class="scroll-mt-20">
-                        <h2 class="text-3xl font-bold mb-6">Basic Usage</h2>
+    
+                    <!-- WiFi Drivers -->
+                    <section id="wifi-drivers" class="scroll-mt-20">
+                        <h2 class="text-3xl font-bold mb-6">WiFi Drivers</h2>
                         <div class="bg-slate-800/50 rounded-lg p-6">
-                            <p class="text-slate-300 mb-4">[Basic usage instructions will go here]</p>
+                            <p class="text-slate-300 mb-4">Your DevStick includes additional WiFi drivers for broader compatibility:</p>
+                            <ul class="space-y-4 text-slate-300">
+                                <li class="flex items-center space-x-2">
+                                    <i class='bx bx-check text-green-400'></i>
+                                    <span>Broadcom drivers pre-installed</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <i class='bx bx-check text-green-400'></i>
+                                    <span>RealTek drivers included</span>
+                                </li>
+                                <li class="flex items-center space-x-2">
+                                    <i class='bx bx-check text-green-400'></i>
+                                    <span>Intel WiFi support built-in</span>
+                                </li>
+                            </ul>
                         </div>
                     </section>
-
+    
                     <!-- Troubleshooting -->
                     <section id="troubleshooting" class="scroll-mt-20">
                         <h2 class="text-3xl font-bold mb-6">Troubleshooting</h2>
                         <div class="space-y-6">
                             <div class="bg-slate-800/50 rounded-lg p-6">
                                 <h3 class="text-xl font-bold mb-4">Common Issues</h3>
-                                <div class="space-y-4">
+                                <div class="space-y-6">
                                     <div>
-                                        <h4 class="font-bold mb-2">[Problem 1]</h4>
-                                        <p class="text-slate-300">[Solution 1]</p>
+                                        <h4 class="font-bold mb-2">USB Not Detected</h4>
+                                        <ol class="space-y-2 text-slate-300">
+                                            <li>1. Try a different USB port</li>
+                                            <li>2. Ensure USB ports are enabled in BIOS</li>
+                                            <li>3. Check if USB boot is enabled in BIOS</li>
+                                        </ol>
                                     </div>
                                     <div>
-                                        <h4 class="font-bold mb-2">[Problem 2]</h4>
-                                        <p class="text-slate-300">[Solution 2]</p>
+                                        <h4 class="font-bold mb-2">Black Screen on Boot</h4>
+                                        <ol class="space-y-2 text-slate-300">
+                                            <li>1. Try booting with nomodeset:
+                                                <ul class="ml-6 mt-2">
+                                                    <li>• Press 'e' at boot menu</li>
+                                                    <li>• Add 'nomodeset' after 'quiet splash'</li>
+                                                    <li>• Press F10 to boot</li>
+                                                </ul>
+                                            </li>
+                                        </ol>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold mb-2">WiFi Not Working</h4>
+                                        <ol class="space-y-2 text-slate-300">
+                                            <li>1. Open Terminal</li>
+                                            <li>2. Run: sudo service NetworkManager restart</li>
+                                            <li>3. If issue persists, check Additional Drivers menu</li>
+                                        </ol>
                                     </div>
                                 </div>
                             </div>
@@ -178,7 +282,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div class="flex items-center space-x-2">
-                    <i class='bx bx-coffee text-blue-400'></i>
+                    <i class='bx bx-chip text-blue-400'></i>
                     <span>DevStick © 2024</span>
                 </div>
                 <div class="flex items-center space-x-6">
