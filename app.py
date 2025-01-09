@@ -3,12 +3,13 @@ import stripe
 import os
 from dotenv import load_dotenv
 from waitress import serve
+import random
 load_dotenv()
 
 
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'yetgryhutjklkhjghfgdfsegrhytjkylkjythrgefarhtj'  
+app.config['SECRET_KEY'] = random.randint(1283912384983285352112414212412, 235723241421412427127421764217864722648712414371442984577285892734598271423154)  
 app.config['SESSION_TYPE'] = 'filesystem'
 
 
@@ -54,6 +55,7 @@ def create_checkout_session():
         
         # Extract customer information
         customer_data = {
+            "product" : product["name"],
             'email': data.get('email'),
             'name': data.get('name'),
             'phone': data.get('phone'),
