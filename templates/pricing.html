@@ -21,7 +21,7 @@
                     <a href="/features" class="text-slate-300 hover:text-blue-400">Features</a>
                     <a href="/pricing" class="text-blue-400 hover:text-blue-500">Pricing</a>
                     <a href="/docs" class="text-slate-300 hover:text-blue-400">Docs</a>
-                    <a href="/support" class="text-blue-400 hover:text-blue-500">Support</a>
+                    <a href="/support" class="text-slate-300 hover:text-blue-400">Support</a>
                 </div>
             </div>
         </div>
@@ -44,7 +44,7 @@
                                 <label class="block text-sm font-medium text-slate-300 mb-2">Select Storage Size</label>
                                 <select 
                                     class="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white"
-                                    onchange="updatePrice(this, 20, 'ubuntu-price')"
+                                    onchange="updatePrice(this, 0, 'ubuntu-price')"
                                 >
                                     <option value="32">32GB ($25)</option>
                                     <option value="64">64GB ($30)</option>
@@ -254,13 +254,121 @@
         </div>
     </div>
 
-    <!-- Footer -->
+    <!-- Customer Info Modal -->
+    <!-- Customer Info Modal (continued) -->
+    <div id="customerModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="bg-slate-800 rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto p-6">
+                <form id="customerForm" class="space-y-6">
+                    <h2 class="text-2xl font-bold">Complete Your Order</h2>
+                    
+                    <!-- Contact Information -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold">Contact Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Email</label>
+                                <input type="email" required name="email" 
+                                    class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Phone Number</label>
+                                <input type="tel" required name="phone" 
+                                    class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Address -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold">Shipping Address</h3>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Full Name</label>
+                            <input type="text" required name="name" 
+                                class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Address Line 1</label>
+                            <input type="text" required name="address" 
+                                class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">City</label>
+                                <input type="text" required name="city" 
+                                    class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">State/Province</label>
+                                <input type="text" required name="state" 
+                                    class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">ZIP/Postal Code</label>
+                                <input type="text" required name="zipCode" 
+                                    class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Country</label>
+                                <select required name="country" 
+                                    class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                                    <option value="">Select Country</option>
+                                    <option value="US">United States</option>
+                                    <option value="CA">Canada</option>
+                                    <option value="GB">United Kingdom</option>
+                                    <option value="AU">Australia</option>
+                                    <option value="DE">Germany</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Device Preferences -->
+                    <div class="space-y-4">
+                        <h3 class="text-lg font-semibold">Device Preferences</h3>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">USB Port Type</label>
+                            <select required name="usbType" 
+                                class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                                <option value="usb-a">USB-A (Standard)</option>
+                                <option value="usb-c">USB-C</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-1">Boot Mode</label>
+                            <select required name="bootMode" 
+                                class="w-full bg-slate-700 border border-slate-600 rounded px-3 py-2">
+                                <option value="uefi">UEFI (Recommended)</option>
+                                <option value="legacy">Legacy BIOS</option>
+                                <option value="both">Both UEFI & Legacy</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex justify-end space-x-4">
+                        <button type="button" onclick="closeCustomerModal()" 
+                            class="px-4 py-2 bg-slate-600 hover:bg-slate-700 rounded">
+                            Cancel
+                        </button>
+                        <button type="submit" 
+                            class="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded">
+                            Continue to Payment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-300 py-8 border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
                 <div class="flex items-center space-x-2">
-                    <i class='bx bx-coffee text-blue-400'></i>
+                    <i class='bx bx-chip text-blue-400 text-2xl'></i>
                     <span>DevStick © 2024</span>
                 </div>
                 <div class="flex items-center space-x-6">
@@ -275,6 +383,7 @@
         </div>
     </footer>
 
+    <!-- Stripe Integration -->
     <script src="https://js.stripe.com/v3/"></script>
     <script>
         const stripe = Stripe('pk_live_51QZOneEHP8FE5L0s2ArTmJUBHfBJV3p9YFFEMXeA7zkzZOucOxKJhS5Ii0h5u8NrRtzq0rmqomUFJtP7VCILFY2X00DInHMRa2'); // Replace with your publishable key
@@ -292,54 +401,68 @@
             const storageSize = select.value;
             const storagePrice = storagePrices[storageSize];
             const totalPrice = basePrice + storagePrice;
-            
-            // Update price display
             document.getElementById(priceElementId).textContent = `$${totalPrice}`;
         }
 
-        async function handlePurchase(productId, priceElementId) {
-            const button = event.target;
-            setLoading(button, true);
-
-            const storageSelect = document.querySelector(`#${priceElementId}`).closest('.p-8').querySelector('select');
-            const storageSize = storageSelect.value;
-
-            try {
-                const response = await fetch('/create-checkout-session', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        product: productId,
-                        storage: storageSize
-                    })
-                });
-
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-
-                const session = await response.json();
+        function handlePurchase(productId, priceElementId) {
+            const modal = document.getElementById('customerModal');
+            const form = document.getElementById('customerForm');
+            
+            // Show modal
+            modal.classList.remove('hidden');
+            
+            // Handle form submission
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                const submitButton = e.target.querySelector('button[type="submit"]');
+                setLoading(submitButton, true);
                 
-                if (session.error) {
-                    console.error('Error:', session.error);
-                    setLoading(button, false);
-                    return;
-                }
+                const formData = new FormData(form);
+                const customerData = Object.fromEntries(formData);
+                
+                // Add product and storage info
+                const storageSelect = document.querySelector(`#${priceElementId}`).closest('.p-8').querySelector('select');
+                customerData.product = productId;
+                customerData.storage = storageSelect.value;
 
-                const result = await stripe.redirectToCheckout({
-                    sessionId: session.id
-                });
+                try {
+                    const response = await fetch('/create-checkout-session', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(customerData)
+                    });
 
-                if (result.error) {
-                    console.error('Error:', result.error);
-                    setLoading(button, false);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+
+                    const session = await response.json();
+                    
+                    if (session.error) {
+                        throw new Error(session.error);
+                    }
+
+                    const result = await stripe.redirectToCheckout({
+                        sessionId: session.id
+                    });
+
+                    if (result.error) {
+                        throw new Error(result.error.message);
+                    }
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred. Please try again.');
+                } finally {
+                    setLoading(submitButton, false);
+                    modal.classList.add('hidden');
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                setLoading(button, false);
-            }
+            };
+        }
+
+        function closeCustomerModal() {
+            document.getElementById('customerModal').classList.add('hidden');
         }
 
         function setLoading(button, loading) {
@@ -354,7 +477,7 @@
                 `;
             } else {
                 button.disabled = false;
-                button.innerHTML = 'Purchase Now';
+                button.innerHTML = 'Continue to Payment';
             }
         }
     </script>

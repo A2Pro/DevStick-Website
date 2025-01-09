@@ -18,7 +18,7 @@ webhook_secret = os.getenv("STRIPE_WEBHOOK")
 PRODUCTS = {
     'ubuntu': {
         'name': 'Ubuntu Edition',
-        'base_price': 2000,
+        'base_price': 0,
         'price_id': 'your_stripe_price_id_for_ubuntu'
     },
     'pop_os': {
@@ -51,6 +51,35 @@ STORAGE_PRICES = {
 def create_checkout_session():
     try:
         data = request.get_json()
+        
+        # Extract customer information
+        customer_data = {
+            'email': data.get('email'),
+            'name': data.get('name'),
+            'phone': data.get('phone'),
+            'address': {
+                'line1': data.get('address'),
+                'city': data.get('city'),
+                'state': data.get('state'),
+                'postal_code': data.get('zipCode'),
+                'country': data.get('country'),
+            },
+            'shipping': {
+                'name': data.get('name'),
+                'address': {
+                    'line1': data.get('address'),
+                    'city': data.get('city'),
+                    'state': data.get('state'),
+                    'postal_code': data.get('zipCode'),
+                    'country': data.get('country'),
+                }
+            }
+        }
+        
+        # Create or retrieve Stripe customer
+        customer = stripe.Customer.create(**customer_data)
+        
+        # Get product and storage information
         product_id = data.get('product')
         storage_size = data.get('storage')
         
@@ -61,14 +90,16 @@ def create_checkout_session():
         storage_price = STORAGE_PRICES.get(storage_size, 0)
         total_amount = product['base_price'] + storage_price
 
+        # Create checkout session with customer ID
         checkout_session = stripe.checkout.Session.create(
+            customer=customer.id,
             payment_method_types=['card'],
             line_items=[{
                 'price_data': {
                     'currency': 'usd',
                     'unit_amount': total_amount,
                     'product_data': {
-                        'name': f"{product['name']} with {storage_size}GB Storage. Incudes the USB drive.",
+                        'name': f"{product['name']} with {storage_size}GB Storage. Includes the USB drive.",
                     },
                 },
                 'quantity': 1,
@@ -78,7 +109,9 @@ def create_checkout_session():
             cancel_url=request.host_url + 'pricing',
             metadata={
                 'product_id': product_id,
-                'storage_size': storage_size
+                'storage_size': storage_size,
+                'usb_type': data.get('usbType'),
+                'boot_mode': data.get('bootMode')
             }
         )
         
@@ -86,7 +119,7 @@ def create_checkout_session():
     except Exception as e:
         print(e)
         return jsonify({'error': str(e)}), 403
-
+    
 @app.route('/webhook', methods=['POST'])
 def webhook():
     payload = request.get_data()
@@ -103,10 +136,6 @@ def webhook():
 
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        
-        
-        
-        
         
         print(f"Payment successful for {session.metadata.product_id} with {session.metadata.storage_size}GB storage")
 
@@ -135,6 +164,7 @@ def docs():
 @app.route("/support")
 def support():
     return render_template("legal.html")
+
 
 if __name__ == '__main__':
     serve(app, host="0.0.0.0", port=8080)
