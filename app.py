@@ -52,13 +52,26 @@ STORAGE_PRICES = {
 def create_checkout_session():
     try:
         data = request.get_json()
+        product_id = data.get('product')
+        storage_size = data.get('storage')
         
-        # Extract customer information
+        if product_id not in PRODUCTS:
+            return jsonify({'error': 'Invalid product'}), 400
+            
+        product = PRODUCTS[product_id]
+        
+        # Generate order number
+        order_number = f"DS-{random.randint(100000, 999999)}"
+        
         customer_data = {
-            "product" : product["name"],
             'email': data.get('email'),
             'name': data.get('name'),
             'phone': data.get('phone'),
+            'metadata': {
+                'order_number': order_number,
+                'product': product['name'],
+                'storage_size': f"{storage_size}GB"
+            },
             'address': {
                 'line1': data.get('address'),
                 'city': data.get('city'),
@@ -78,21 +91,10 @@ def create_checkout_session():
             }
         }
         
-        # Create or retrieve Stripe customer
         customer = stripe.Customer.create(**customer_data)
-        
-        # Get product and storage information
-        product_id = data.get('product')
-        storage_size = data.get('storage')
-        
-        if product_id not in PRODUCTS:
-            return jsonify({'error': 'Invalid product'}), 400
-            
-        product = PRODUCTS[product_id]
         storage_price = STORAGE_PRICES.get(storage_size, 0)
         total_amount = product['base_price'] + storage_price
 
-        # Create checkout session with customer ID
         checkout_session = stripe.checkout.Session.create(
             customer=customer.id,
             payment_method_types=['card'],
@@ -107,9 +109,10 @@ def create_checkout_session():
                 'quantity': 1,
             }],
             mode='payment',
-            success_url=request.host_url + 'success?session_id={CHECKOUT_SESSION_ID}',
+            success_url=request.host_url + f'success?session_id={{CHECKOUT_SESSION_ID}}&order={order_number}',
             cancel_url=request.host_url + 'pricing',
             metadata={
+                'order_number': order_number,
                 'product_id': product_id,
                 'storage_size': storage_size,
                 'usb_type': data.get('usbType'),
@@ -138,15 +141,44 @@ def webhook():
 
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
+        # Update session in database to mark as completed
+        session_id = session.id
+        order_number = session.metadata.order_number
         
-        print(f"Payment successful for {session.metadata.product_id} with {session.metadata.storage_size}GB storage")
+        print(f"Payment successful for Order #{order_number}: {session.metadata.product_id} with {session.metadata.storage_size}GB storage")
 
     return jsonify({'status': 'success'})
 
 @app.route("/success")
 def success():
-    return render_template("success.html")
-
+    session_id = request.args.get('session_id')
+    order_number = request.args.get('order')
+    
+    if not session_id or not order_number:
+        return redirect(url_for('pricing'))
+    
+    try:
+        # Verify this is a valid checkout session
+        checkout_session = stripe.checkout.Session.retrieve(session_id)
+        
+        if checkout_session.payment_status != 'paid':
+            return redirect(url_for('pricing'))
+        
+        # Get customer details
+        customer = stripe.Customer.retrieve(checkout_session.customer)
+        product_name = customer.metadata.product
+        storage_size = customer.metadata.storage_size
+        
+        return render_template(
+            "success.html",
+            order_number=order_number,
+            product_name=product_name,
+            storage_size=storage_size
+        )
+    except Exception as e:
+        print(e)
+        return redirect(url_for('pricing'))
+    
 @app.route("/")
 def index():
     return render_template("index.html")
