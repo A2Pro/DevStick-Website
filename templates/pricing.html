@@ -44,7 +44,7 @@
                                 <label class="block text-sm font-medium text-slate-300 mb-2">Select Storage Size</label>
                                 <select 
                                     class="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white"
-                                    onchange="updatePrice(this, 0, 'ubuntu-price')"
+                                    onchange="updatePrice(this, 25, 'ubuntu-price')"
                                 >
                                     <option value="32">32GB ($25)</option>
                                     <option value="64">64GB ($30)</option>
@@ -91,7 +91,7 @@
                                 <label class="block text-sm font-medium text-slate-300 mb-2">Select Storage Size</label>
                                 <select 
                                     class="w-full bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white"
-                                    onchange="updatePrice(this, 30, 'pop-price')"
+                                    onchange="updatePrice(this, 35, 'pop-price')"
                                 >
                                     <option value="32">32GB ($35)</option>
                                     <option value="64">64GB ($40)</option>
@@ -389,13 +389,15 @@
         const stripe = Stripe('pk_live_51QZOneEHP8FE5L0s2ArTmJUBHfBJV3p9YFFEMXeA7zkzZOucOxKJhS5Ii0h5u8NrRtzq0rmqomUFJtP7VCILFY2X00DInHMRa2'); // Replace with your publishable key
 
         const storagePrices = {
-            '32': 5,
-            '64': 10,
-            '128': 15,
-            '256': 25,
-            '512': 40,
-            '1024': 90
+            '32': 7.00,    // $7.00
+            '64': 12.00,   // $12.00
+            '128': 17.00,  // $17.00
+            '256': 27.00,  // $27.00
+            '512': 42.00,  // $42.00
+            '1024': 92.00  // $92.00
         };
+        
+        
 
         function updatePrice(select, basePrice, priceElementId) {
             const storageSize = select.value;
