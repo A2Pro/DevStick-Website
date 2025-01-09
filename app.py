@@ -19,33 +19,29 @@ webhook_secret = os.getenv("STRIPE_WEBHOOK")
 PRODUCTS = {
     'ubuntu': {
         'name': 'Ubuntu Edition',
-        'base_price': 0,
-        'price_id': 'your_stripe_price_id_for_ubuntu'
+        'base_price': 2000
     },
     'pop_os': {
         'name': 'Pop!_OS Edition',
-        'base_price': 3000,
-        'price_id': 'your_stripe_price_id_for_pop_os'
+        'base_price': 3000
     },
     'arch': {
         'name': 'Arch Linux Edition',
-        'base_price': 4000,
-        'price_id': 'your_stripe_price_id_for_arch'
+        'base_price': 4000
     },
     'mint': {
         'name': 'Linux Mint Edition',
-        'base_price': 2500,
-        'price_id': 'your_stripe_price_id_for_mint'
+        'base_price': 2500
     }
 }
 
 STORAGE_PRICES = {
-    '32': 500,    
-    '64': 1000,   
-    '128': 1500,  
-    '256': 2500,  
-    '512': 4000,  
-    '1024': 9000  
+    '32': 700,    
+    '64': 1200,   
+    '128': 1700,  
+    '256': 2700,  
+    '512': 4200,  
+    '1024': 9200  
 }
 
 @app.route("/create-checkout-session", methods=['POST'])
